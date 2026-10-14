@@ -8,8 +8,9 @@ Build the enterprise environment that the vast majority of real attacks and defe
 
 ## Architecture & stack
 
-- **Domain Controller:** Windows Server 2022 Evaluation (180-day, free)
-- **Clients:** 1–2× Windows 11 Enterprise Evaluation
+- **Domain Controller:** Windows Server 2022 Evaluation (180-day, free) — 2 vCPU / 2 GB RAM
+- **Client:** 1× Windows 11 Enterprise Evaluation — 2 vCPU / 4 GB RAM (Windows 11's minimum; enable the virtual TPM in VMware: *VM Settings → Options → Access Control → Encrypt*, then *Add → Trusted Platform Module*)
+- **RAM budget:** DC 2 + client 4 + pfSense 1 ≈ 7 GB, well inside the laptop's ~11 GB for VMs
 - **Domain:** `lab.local` (example) · all on the isolated `internal` network from Lab 1
 - **Telemetry:** Sysmon installed on every host (config comes in Lab 5, but install it now)
 - **Diagram:** `../../diagrams/lab-03.png` _(add after build)_
@@ -20,7 +21,7 @@ Build the enterprise environment that the vast majority of real attacks and defe
 2. **Promote to a Domain Controller** — add the *Active Directory Domain Services* role, create a new forest `lab.local`. Reboot.
 3. **Design the directory:** OUs (e.g. `Workstations`, `Servers`, `Staff`, `Admins`), 15–20 users, a few groups.
 4. **Group Policy:** a password policy, a logon banner, and a mapped drive GPO — enough to see GPO processing in action.
-5. **Join the Windows 11 clients** to `lab.local`; log in as domain users.
+5. **Join the Windows 11 client** to `lab.local`; log in as domain users.
 6. **Create a service account** and a file share with NTFS permissions.
 7. **Install Sysmon** on DC and clients now (default config for now; curated config in Lab 5).
 8. **Snapshot everything** as `clean-domain` — this is the Phase 3 starting point.
@@ -32,7 +33,7 @@ Install-ADDSForest -DomainName "lab.local" -InstallDns
 Get-ADDomain ; Get-ADUser -Filter * | Measure-Object
 ```
 
-> **Shortcut:** **GOAD / GOAD-Light** (Orange Cyberdefense) automates a deliberately-vulnerable AD forest and is ideal for Phase 3 (Lab 18). Build at least one domain by hand first, though — it teaches far more about how AD actually works. GOAD-Light needs ~20 GB RAM and ~115 GB disk.
+> **Later, for Lab 18:** **GOAD** (Orange Cyberdefense) automates a deliberately vulnerable AD lab. On a 16 GB laptop use **GOAD MINILAB** (one DC + one workstation); GOAD-Light needs ~20 GB RAM. Building this domain by hand first teaches far more about how AD actually works.
 
 ## Exercises & findings
 

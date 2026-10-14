@@ -8,7 +8,8 @@ Stand up a repeatable VM workflow with clean, isolated networking and working sn
 
 ## Architecture & stack
 
-- **Hypervisor:** VMware Workstation Pro 17 (free for personal use) _or_ VirtualBox 7.x
+- **Host:** Windows laptop, 16 GB RAM (~11 GB usable for VMs at once), 500+ GB SSD
+- **Hypervisor:** VMware Workstation Pro (free for personal use)
 - **Base VMs:** Kali Linux (attacker), Ubuntu Server 24.04 (generic Linux target)
 - **Virtual networks:**
   - `NAT` — build-time internet only, used deliberately then disconnected
@@ -18,12 +19,10 @@ Stand up a repeatable VM workflow with clean, isolated networking and working sn
 
 ## Build
 
-1. **Install the hypervisor.**
-   - VMware: download *Workstation Pro 17 for Personal Use* from the Broadcom portal (free Broadcom account required), install, and at first run choose **"Use VMware Workstation 17 for Personal Use."**
-   - VirtualBox: install the base package + the matching Extension Pack.
-2. **Define the three virtual networks** in the hypervisor's Virtual Network Editor (VMware) / Host Network Manager (VirtualBox): one NAT, one host-only (DHCP on, no uplink), one internal.
-3. **Build the Kali VM** — 2 vCPU / 4 GB RAM / 60 GB disk. Install, update once over NAT, then move its adapter to host-only.
-4. **Build the Ubuntu Server VM** — 2 vCPU / 2 GB RAM / 25 GB disk. Minimal install, OpenSSH enabled.
+1. **Install VMware Workstation Pro** (already done) and check it's on the latest version: *Help → Software Updates*.
+2. **Define the three virtual networks** in *Edit → Virtual Network Editor* (run as administrator): VMnet8 = NAT, VMnet1 = host-only (DHCP on, no uplink), and one extra host-only VMnet (e.g. VMnet2) used as the lab-internal network.
+3. **Build the Kali VM** — 2 vCPU / 3 GB RAM / 60 GB disk (use the prebuilt Kali VMware image to save time). Update once over NAT, then move its adapter to host-only.
+4. **Build the Ubuntu Server VM** — 1 vCPU / 1.5 GB RAM / 25 GB disk. Minimal install, no desktop, OpenSSH enabled.
 5. **Snapshot both** as `clean-install` once each boots and updates cleanly.
 
 ```bash

@@ -26,6 +26,8 @@ The three strongest pieces — the Sigma rules (Lab 07), the purple-team report 
 
 _Diagram to be added to `diagrams/` after Lab 1. In short: an isolated internal lab network behind a pfSense/OPNsense firewall, running a small Active Directory domain, a SIEM, and network monitoring, with a Kali attacker box and purpose-built analysis VMs attached per phase._
 
+**Host:** a single Windows laptop — 16 GB RAM, 500+ GB SSD, VMware Workstation Pro. Every lab is sized to fit about 11 GB of VMs running at once, which is why some labs use lighter variants (Security Onion in Import mode, GOAD MINILAB). Doing it all on modest hardware is part of the exercise.
+
 ## Progress tracker
 
 Tick a lab only when its write-up is published. 26 labs total.
