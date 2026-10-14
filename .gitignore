@@ -1,0 +1,40 @@
+# Never commit sensitive or heavy lab material
+# --- Credentials & secrets ---
+*.pem
+*.key
+*.ppk
+*.ovpn
+*.kdbx
+.env
+*secret*
+*password*
+credentials*
+
+# --- Live malware samples & raw captures (keep OUT of git) ---
+*.exe
+*.dll
+*.bin
+*.sample
+samples/
+*.pcap
+*.pcapng
+*.raw
+*.mem
+*.vmem
+*.dmp
+
+# --- Disk & VM images ---
+*.vmdk
+*.vdi
+*.qcow2
+*.iso
+*.ova
+*.ovf
+
+# --- OS / editor noise ---
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
+__pycache__/
